@@ -14,7 +14,6 @@ const News = () => {
         setNews(data.articles);
       });
   }, []);
-  console.log(news);
   return (
     <div className="text-muted-foreground space-y-3 bg-muted border  rounded-xl pt-2 p-4">
       <h1 className="font-bold text-foreground text-2xl ">Daily news</h1>

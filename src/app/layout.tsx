@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/homepage/sidebar";
 import NewsSection from "@/components/homepage/news-section";
+import { SessionWrapper } from "./providers";
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -21,16 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={cn(poppins.variable, "antialiased ")}>
-        <section className="max-w-6xl mx-auto flex justify-between">
-          <aside className="hidden sm:inline border-r h-screen">
-            <Sidebar />
-          </aside>
-          <main>{children}</main>
-          <NewsSection />
-        </section>
-      </body>
-    </html>
+    <SessionWrapper>
+      <html lang="en" className="dark">
+        <body className={cn(poppins.variable, "antialiased ")}>
+          <section className="max-w-6xl mx-auto flex justify-between">
+            <aside className="hidden sm:inline border-r h-screen">
+              <Sidebar />
+            </aside>
+            <main>{children}</main>
+            <NewsSection />
+          </section>
+        </body>
+      </html>
+    </SessionWrapper>
   );
 }
