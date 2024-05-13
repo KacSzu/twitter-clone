@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/homepage/sidebar";
+import NewsSection from "@/components/homepage/news-section";
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -27,7 +28,7 @@ export default function RootLayout({
             <Sidebar />
           </aside>
           <main>{children}</main>
-          <div>News</div>
+          <NewsSection />
         </section>
       </body>
     </html>
