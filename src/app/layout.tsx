@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Sidebar from "@/components/homepage/sidebar";
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -21,7 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={cn(poppins.variable, "antialiased ")}>
-        <main>{children}</main>
+        <section className="max-w-6xl mx-auto flex justify-between">
+          <aside className="hidden sm:inline border-r h-screen">
+            <Sidebar />
+          </aside>
+          <main>{children}</main>
+          <div>News</div>
+        </section>
       </body>
     </html>
   );
