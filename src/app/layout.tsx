@@ -29,7 +29,7 @@ export default function RootLayout({
             <aside className="hidden sm:inline border-r h-screen">
               <Sidebar />
             </aside>
-            <main>{children}</main>
+            <main className="w-full flex-1">{children}</main>
             <NewsSection />
           </section>
         </body>
