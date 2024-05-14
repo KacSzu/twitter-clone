@@ -1,5 +1,4 @@
 "use client";
-
 import { app } from "@/firebase";
 import { cn } from "@/lib/utils";
 import {
@@ -88,6 +87,7 @@ const PostInput = () => {
     setPostValue("");
     setImageFileUrl(null);
     setSelectedFile(null);
+    location.reload();
   }
   if (!session) return null;
   return (
@@ -110,7 +110,7 @@ const PostInput = () => {
             src={imageFileUrl as string}
             alt="uploaded image"
             className={cn(
-              "w-full  rounded-xl object-fit cursor-poiner",
+              "  rounded-xl object-fit cursor-poiner",
               isImageUploading && "animate-pulse"
             )}
           />
@@ -118,7 +118,7 @@ const PostInput = () => {
         <div className=" flex items-center justify-between pt-2">
           <HiOutlinePhotograph
             onClick={() => imagePickRef?.current?.click()}
-            className="h-10 w-10 p-2  text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer"
+            className="h-10 w-10 p-2  text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300"
           />
           <input
             onChange={addImageToPost}

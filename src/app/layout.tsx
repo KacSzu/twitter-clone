@@ -26,7 +26,7 @@ export default function RootLayout({
       <html lang="en" className="dark">
         <body className={cn(poppins.variable, "antialiased ")}>
           <section className="max-w-6xl mx-auto flex justify-between">
-            <aside className="hidden sm:inline border-r h-screen">
+            <aside className="hidden sm:inline border-r h-screen sticky top-0">
               <Sidebar />
             </aside>
             <main className="w-full flex-1">{children}</main>
