@@ -28,7 +28,7 @@ const Post = ({ post }: { post: PostType }) => {
             <img src={image} className="rounded-xl mr-2" />
           </Link>
         )}
-        <PostIcons />
+        <PostIcons id={post.id} />
       </div>
     </div>
   );
