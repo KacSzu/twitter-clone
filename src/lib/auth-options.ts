@@ -8,4 +8,21 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
   ],
+  callbacks: {
+    jwt({ token, user, profile }) {
+      if (user) token.user = user;
+      if (profile) token.profile = profile;
+
+      return token;
+    },
+    session({ session, token, user }) {
+      if (session.user)
+        session.user = {
+          ...session.user,
+          username: (token.profile as any).login,
+          id: token.sub,
+        } as any;
+      return session;
+    },
+  },
 };

@@ -6,7 +6,7 @@ interface IUserProfile {
 }
 
 const UserProfile = ({ session }: IUserProfile) => {
-  const { image, email, name } = session.user;
+  const { image, email, name, username } = session.user;
   return (
     <div className="flex gap-4 rounded-lg hover:bg-muted/20  text-muted-foreground text-sm items-center xl:mr-2 cursor-pointer p-3">
       <Image
@@ -18,7 +18,7 @@ const UserProfile = ({ session }: IUserProfile) => {
       />
       <div className="hidden xl:inline">
         <h4 className="font-bold">{name}</h4>
-        <p className="text-xs">{email}</p>
+        <p className="text-xs">@{username}</p>
       </div>
       <HiDotsHorizontal className="h-5 xl:ml-8 hidden xl:inline" />
     </div>
