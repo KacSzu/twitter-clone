@@ -24,6 +24,7 @@ const PostsSection = async () => {
       text: docData.text,
       timestamp: docData.timestamp,
       username: docData.username,
+      userId: docData.userId,
     };
     data.push(postData);
   });

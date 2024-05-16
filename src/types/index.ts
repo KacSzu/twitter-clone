@@ -8,4 +8,5 @@ export type PostType = {
   text: string;
   timestamp: firebase.firestore.Timestamp;
   username: string;
+  userId: string;
 };

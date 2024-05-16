@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostIcons from "./post-icons";
 const Post = ({ post }: { post: PostType }) => {
-  const { id, image, name, profileImg, text, username } = post;
+  const { id, image, name, profileImg, text, username, userId } = post;
   console.log(post);
   return (
     <div className="flex p-3 border-b border-muted hover:bg-muted/20 ">
@@ -28,7 +28,7 @@ const Post = ({ post }: { post: PostType }) => {
             <img src={image} className="rounded-xl mr-2" />
           </Link>
         )}
-        <PostIcons id={post.id} />
+        <PostIcons post={post} />
       </div>
     </div>
   );

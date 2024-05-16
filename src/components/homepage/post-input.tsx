@@ -75,7 +75,7 @@ const PostInput = () => {
     if (!session) return null;
     setIsPostLoading(true);
     const docRef = await addDoc(collection(db, "posts"), {
-      id: session.user.id,
+      userId: session.user.id,
       name: session.user.name,
       username: session.user.username,
       image: imageFileUrl,
@@ -132,7 +132,7 @@ const PostInput = () => {
               postValue.trim() === "" || isPostsLoading || isImageUploading
             }
             onClick={handleCreateNewPost}
-            className="bg-sky-500 text-foreground hover:bg-sky-500/90 px-5  rounded-full py-1.5 font-semibold disabled:opacity-50"
+            className="bg-sky-500 text-foreground hover:bg-sky-500/90 px-5  rounded-full py-1.5 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPostsLoading ? (
               <div className="px-1.5 py-0.5">

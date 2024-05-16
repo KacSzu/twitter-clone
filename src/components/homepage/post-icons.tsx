@@ -20,12 +20,33 @@ import {
   HiOutlineHeart,
   HiOutlineTrash,
 } from "react-icons/hi";
-const PostIcons = ({ id }: { id: string }) => {
+import Modal from "../common/modal";
+import { PostType } from "@/types";
+import CommentModal from "./comment-modal";
+
+const PostIcons = ({ post }: { post: PostType }) => {
+  const { id, image, name, profileImg, text, username, userId } = post;
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likes, setLikes] = useState<QueryDocumentSnapshot<DocumentData>[]>([]);
+  const [comments, setComments] = useState<
+    QueryDocumentSnapshot<DocumentData>[]
+  >([]);
   const { data: session } = useSession();
   const db = getFirestore(app);
+  useEffect(() => {
+    onSnapshot(collection(db, "posts", id, "likes"), (snapshot) => {
+      setLikes(snapshot.docs);
+    });
+    onSnapshot(collection(db, "posts", id, "comments"), (snapshot) => {
+      setComments(snapshot.docs);
+    });
+  }, [db, id]);
 
+  useEffect(() => {
+    setIsLiked(likes.findIndex((like) => like.id === session?.user.id) !== -1);
+  }, [likes, session?.user.id]);
+  console.log(comments);
+  console.log(likes);
   async function likePost() {
     if (session && session.user && session.user.id) {
       if (isLiked) {
@@ -41,19 +62,51 @@ const PostIcons = ({ id }: { id: string }) => {
     }
   }
 
-  useEffect(() => {
-    onSnapshot(collection(db, "posts", id, "likes"), (snapshot) => {
-      setLikes(snapshot.docs);
-    });
-  }, [db, id]);
-
-  useEffect(() => {
-    setIsLiked(likes.findIndex((like) => like.id === session?.user.id) !== -1);
-  }, [likes, session?.user.id]);
+  async function deletePost() {
+    if (session?.user?.id === userId) {
+      if (window.confirm("Are you sure you want to delete this post ?")) {
+        await deleteDoc(doc(db, "posts", id))
+          .then(() => {
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+  }
 
   return (
     <div className="flex gap-2 p-2 ">
-      <HiOutlineChat className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300 " />
+      {session ? (
+        <Modal>
+          <Modal.Open opens="comment-modal">
+            <div className="flex items-center">
+              <HiOutlineChat className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300 " />
+              {comments.length > 0 && (
+                <span className={cn("text-sm text-muted-foreground")}>
+                  {comments.length}
+                </span>
+              )}
+            </div>
+          </Modal.Open>
+          <Modal.Window name="comment-modal">
+            <CommentModal post={post} />
+          </Modal.Window>
+        </Modal>
+      ) : (
+        <div className="flex items-center">
+          <HiOutlineChat
+            onClick={() => signIn("github")}
+            className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300 "
+          />
+          {comments.length > 0 && (
+            <span className={cn("text-sm text-muted-foreground")}>
+              {comments.length}
+            </span>
+          )}
+        </div>
+      )}
       <div className="flex items-center">
         {isLiked ? (
           <HiHeart
@@ -77,8 +130,12 @@ const PostIcons = ({ id }: { id: string }) => {
           </span>
         )}
       </div>
-
-      <HiOutlineTrash className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300" />
+      {session?.user?.id === userId && (
+        <HiOutlineTrash
+          onClick={deletePost}
+          className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300"
+        />
+      )}
     </div>
   );
 };
