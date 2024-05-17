@@ -1,10 +1,9 @@
 import { PostType } from "@/types";
 import Link from "next/link";
 import { HiDotsHorizontal } from "react-icons/hi";
-import PostIcons from "./post-icons";
+import PostIcons from "../common/post-icons";
 const Post = ({ post }: { post: PostType }) => {
   const { id, image, name, profileImg, text, username, userId } = post;
-  console.log(post);
   return (
     <div className="flex p-3 border-b border-muted hover:bg-muted/20 ">
       <img

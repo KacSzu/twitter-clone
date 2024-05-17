@@ -8,7 +8,6 @@ import { signOut, useSession } from "next-auth/react";
 import UserProfile from "./user-profile";
 const Sidebar = () => {
   const { data: session } = useSession();
-  console.log(session);
   return (
     <div className="flex flex-col p-3 justify-between h-screen ">
       <div className="flex flex-col justify-between">

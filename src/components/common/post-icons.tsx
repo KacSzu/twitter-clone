@@ -20,9 +20,9 @@ import {
   HiOutlineHeart,
   HiOutlineTrash,
 } from "react-icons/hi";
-import Modal from "../common/modal";
+import Modal from "./modal";
 import { PostType } from "@/types";
-import CommentModal from "./comment-modal";
+import CommentModal from "../homepage/comment-modal";
 
 const PostIcons = ({ post }: { post: PostType }) => {
   const { id, image, name, profileImg, text, username, userId } = post;
@@ -45,8 +45,6 @@ const PostIcons = ({ post }: { post: PostType }) => {
   useEffect(() => {
     setIsLiked(likes.findIndex((like) => like.id === session?.user.id) !== -1);
   }, [likes, session?.user.id]);
-  console.log(comments);
-  console.log(likes);
   async function likePost() {
     if (session && session.user && session.user.id) {
       if (isLiked) {

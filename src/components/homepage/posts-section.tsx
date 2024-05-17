@@ -7,7 +7,7 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import Post from "./post";
+import Post from "../common/post";
 
 const PostsSection = async () => {
   const db = getFirestore(app);
@@ -22,7 +22,6 @@ const PostsSection = async () => {
       name: docData.name,
       profileImg: docData.profileImg,
       text: docData.text,
-      timestamp: docData.timestamp,
       username: docData.username,
       userId: docData.userId,
     };
