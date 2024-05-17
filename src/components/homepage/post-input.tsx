@@ -82,11 +82,10 @@ const PostInput = () => {
       profileImg: session.user.image,
       timestamp: serverTimestamp(),
     });
-    setIsPostLoading(false);
     setPostValue("");
     setImageFileUrl(null);
     setSelectedFile(null);
-    location.reload();
+    setIsPostLoading(false);
   }
   if (!session) return null;
   return (

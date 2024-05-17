@@ -11,7 +11,13 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const CommentModal = ({ post }: { post: PostType }) => {
+const CommentModal = ({
+  post,
+  onCloseModal,
+}: {
+  post: PostType;
+  onCloseModal: () => void;
+}) => {
   const { id, image, name, profileImg, text, username, userId } = post;
   const [replyValue, setReplyValue] = useState<string>("");
   const { data: session } = useSession();
@@ -27,6 +33,7 @@ const CommentModal = ({ post }: { post: PostType }) => {
       timestamp: serverTimestamp(),
     })
       .then(() => {
+        onCloseModal();
         setReplyValue("");
         router.push(`/posts/${id}`);
       })

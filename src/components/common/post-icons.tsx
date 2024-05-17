@@ -97,7 +97,7 @@ const PostIcons = ({ post }: { post: PostType }) => {
             </div>
           </Modal.Open>
           <Modal.Window name="comment-modal">
-            <CommentModal post={post} />
+            <CommentModal onCloseModal={close} post={post} />
           </Modal.Window>
         </Modal>
       ) : (
