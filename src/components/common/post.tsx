@@ -4,7 +4,6 @@ import PostIcons from "../common/post-icons";
 import Link from "next/link";
 const Post = ({ post }: { post: PostType }) => {
   const { id, image, name, profileImg, text, username, userId } = post;
-  console.log(id);
   return (
     <div className="flex p-3 border-b border-muted hover:bg-muted/20 ">
       <img

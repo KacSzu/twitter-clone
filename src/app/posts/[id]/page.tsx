@@ -18,7 +18,6 @@ async function PostPage({ params }: IPostPage) {
   const db = getFirestore(app);
   const querySnapshot = await getDoc(doc(db, "posts", id));
   const data = querySnapshot.data();
-  console.log(data);
   if (!data) {
     return (
       <div className="max-w-2xl mr-auto border-muted min-h-screen">
