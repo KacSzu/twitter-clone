@@ -23,7 +23,17 @@ import {
 import Modal from "./modal";
 import { PostType } from "@/types";
 import CommentModal from "../homepage/comment-modal";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 const PostIcons = ({ post }: { post: PostType }) => {
   const { id, image, name, profileImg, text, username, userId } = post;
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -62,15 +72,13 @@ const PostIcons = ({ post }: { post: PostType }) => {
 
   async function deletePost() {
     if (session?.user?.id === userId) {
-      if (window.confirm("Are you sure you want to delete this post ?")) {
-        await deleteDoc(doc(db, "posts", id))
-          .then(() => {
-            window.location.reload();
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+      await deleteDoc(doc(db, "posts", id))
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }
 
@@ -129,10 +137,26 @@ const PostIcons = ({ post }: { post: PostType }) => {
         )}
       </div>
       {session?.user?.id === userId && (
-        <HiOutlineTrash
-          onClick={deletePost}
-          className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300"
-        />
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <HiOutlineTrash className="h-8 w-8 p-2  hover:text-sky-500 hover:bg-sky-900/30 rounded-full cursor-pointer transition duration-300" />
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-background">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={deletePost}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
     </div>
   );

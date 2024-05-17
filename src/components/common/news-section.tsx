@@ -2,7 +2,7 @@ import News from "./news";
 
 const NewsSection = () => {
   return (
-    <div className="lg:flex-col p-3 h-screen border-l  hidden lg:flex w-[24rem]">
+    <div className="lg:flex-col p-3 h-full min-h-screen   hidden lg:flex w-[24rem] ">
       <div className="sticky top-0 py-2 bg-background">
         <input
           type="text"

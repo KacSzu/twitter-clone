@@ -2,7 +2,6 @@
 import { app } from "@/firebase";
 import { cn } from "@/lib/utils";
 import {
-  Timestamp,
   addDoc,
   collection,
   getFirestore,
@@ -91,7 +90,7 @@ const PostInput = () => {
   }
   if (!session) return null;
   return (
-    <div className="flex border-b border-muted p-3 space-x-3 w-full">
+    <div className="flex border-b  border-muted p-3 space-x-3 w-full">
       <img
         src={session.user.image as string}
         alt="user image"

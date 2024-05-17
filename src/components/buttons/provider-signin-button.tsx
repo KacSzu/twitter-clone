@@ -16,7 +16,7 @@ const ProvidersAuthButton = ({
   return (
     <button
       onClick={() => signIn(provider)}
-      className="bg-foreground text-background rounded-full py-2 flex items-center justify-center w-[200px] gap-3 "
+      className="flex gap-4 rounded-full hover:bg-muted/20  text-foreground text-base items-center xl:mr-1.5 cursor-pointer p-3"
     >
       <span className="text-xl">{icon}</span>
       <span className="font-semibold">{label}</span>

@@ -8,6 +8,7 @@ import {
   query,
 } from "firebase/firestore";
 import Post from "../common/post";
+import Link from "next/link";
 
 const PostsSection = async () => {
   const db = getFirestore(app);
@@ -28,9 +29,11 @@ const PostsSection = async () => {
     data.push(postData);
   });
   return (
-    <div>
+    <div className="">
       {data.map((post) => (
-        <Post key={post.id} post={post} />
+        <Link key={post.id} href={`/posts/${post.id}`}>
+          <Post post={post} />
+        </Link>
       ))}
     </div>
   );

@@ -36,7 +36,7 @@ const News = () => {
           )}
       </div>
       <button
-        className="text-sm pl-2 py-1 text-white hover:text-muted-foreground"
+        className="text-sm pl-2 py-1 text-white hover:text-muted-foreground "
         onClick={() => setArticleNum(articleNum + 3)}
       >
         Show more...
